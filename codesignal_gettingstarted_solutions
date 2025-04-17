@@ -1,0 +1,5 @@
+-- Sort products from select categories by price 
+Select product_name, product_price, category_ID from Products
+where category_ID between 1 and 3
+order by product_price asc;
+
