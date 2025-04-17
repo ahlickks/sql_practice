@@ -1,5 +1,15 @@
--- Sort products from select categories by price 
-Select product_name, product_price, category_ID from Products
+-- Sort products from selected categories by price 
+select product_name, product_price, category_ID from Products
 where category_ID between 1 and 3
 order by product_price asc;
 
+-- Filter orders by date range, ID range, and status
+select * from orders
+where year(order_date) in (2021, 2022)
+and order_id between 100 and 400
+and order_status in ('delivered', 'canceled')
+
+-- Return orders from after 2021
+select * from orders
+where year(order_date) > 2021
+order by order_date asc
