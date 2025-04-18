@@ -4,3 +4,9 @@ from orders
 join customers on orders.customer_id = customers.customer_id
 where orders.order_status = 'Delivered'
 order by orders.order_date desc;
+
+-- Join products and order items tables to find category 2 products with extended support, sorted by price
+Select products.product_name, products.product_price, orderitems.extended_support from products
+inner join orderitems on orderitems.product_id = products.product_id
+where orderitems.extended_support = 1 and products.category_id = 2
+order by products.product_price desc
