@@ -10,3 +10,17 @@ Select products.product_name, products.product_price, orderitems.extended_suppor
 inner join orderitems on orderitems.product_id = products.product_id
 where orderitems.extended_support = 1 and products.category_id = 2
 order by products.product_price desc
+
+-- Use left join to return product name, price & extended support status from products & orderitems tables
+select products.product_name, products.product_price, orderitems.extended_support from products
+left join orderitems on orderitems.product_id = products.product_id
+
+-- Return selected columns, emulating full join to return all results from products & orderitems tables
+Select products.product_name, products.product_price, orderitems.extended_support from Products
+left join orderitems on products.product_id = OrderItems.product_id
+
+union ALL
+
+Select products.product_name, products.product_price, orderitems.extended_support from orderitems
+right join products on products.product_id = OrderItems.product_id
+where products.product_id is null
