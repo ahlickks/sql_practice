@@ -1,0 +1,35 @@
+-- Select all delivered orders with a product over $100
+select * from orders
+join orderitems on orders.order_id = orderitems.order_id
+join products on products.product_id = orderitems.product_id
+where products.product_price > 100
+and orders.order_status = 'Delivered'
+
+-- Select product IDs & names and orders that required support from specific categories
+select p.product_id, p.product_name, oi.order_id from products AS p
+join orderitems as oi on p.product_id = oi.product_id
+where p.category_id in (1,2)
+    and oi.extended_support = 1
+
+-- Use subquery to find products with an above-average price and whether they required support
+select 
+    p.product_id as ProductID,
+    p.product_name as ProductName,
+    p.product_price as ProductPrice,
+    oi.extended_support as ExtendedSupport
+from products p
+inner join orderitems oi ON p.product_id = oi.product_id
+where p.product_price > (
+        select avg(product_price)
+        from products);
+
+-- Categorize products based on price using CASE function
+select 
+    p.product_id ProductID,
+    p.product_price ProductPrice,
+    case
+        when p.product_price < 20 then 'low'
+        when p.product_price between 20 and 100 then 'mid'
+        else 'high' 
+        end PriceCategory
+from products p
