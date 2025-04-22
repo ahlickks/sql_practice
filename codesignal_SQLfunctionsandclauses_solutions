@@ -29,8 +29,8 @@ and extended_support = 1
 group by orders.order_date
 order by orders.order_date desc;
 
--- Show total amount of supports extended and percent of items needing support grouped by year
--- Since 'yes' = 1 and 'no' = 0 for extended_support, the Average value shows teh percent of items that required support
+-- Show total amount of supports extended and percent of items needing support, grouped by year
+-- Since 'yes' = 1 and 'no' = 0 for extended_support, the Average value shows the percentage of items that required support
 select year(orders.order_date) as Year, sum(orderitems.extended_support) as "Supports Extended", avg(orderitems.extended_support) as Average from orders
 join orderitems on orders.order_id = orderitems.order_id
 group by year(orders.order_date);
